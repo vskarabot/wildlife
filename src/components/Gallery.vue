@@ -1,35 +1,34 @@
 <script setup>
 import Filter from '@/components/Filter.vue';
+
+    const url = '/src/assets/images/gallery/';
+    const images = [
+        { name: 'Buck', url: 'buck.jpg' }, 
+        { name: 'Kingfisher', url: 'kingfi.jpg' }, 
+        { name: 'Lion', url: 'lion.jpg' }, 
+        { name: 'Fox', url: 'fox.jpg' }, 
+        { name: 'Hummingbird', url: 'hum.jpg' }, 
+        { name: 'Turtle', url: 'turtle.jpg' },
+    ];
+
 </script>
 
 <template>
     <div class="container">
         <Filter />
         <div class="gallery">
-            <div class="column">
-                <img src="../assets/images/gallery/buck.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/turtle.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/hum.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/lion.jpg" alt="lion" loading="lazy">
-            </div>
-            <div class="column">
-                <img src="../assets/images/gallery/kingfi.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/turtle.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/fox.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/hum.jpg" alt="lion" loading="lazy">
-            </div>
-            <div class="column">
-                <img src="../assets/images/gallery/buck.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/lion.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/kingfi.jpg" alt="lion" loading="lazy">
-                <img src="../assets/images/gallery/fox.jpg" alt="lion" loading="lazy">
+            <div class="imageContainer" v-for="image in images">
+                <img :src="url + image.url" :key="image">
+                <div class="imageInfo">
+                    {{ image.name }}
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped>
-    .container, .gallery, .column {
+    .container {
         display: flex;
         gap: 1rem;
     }
@@ -45,22 +44,57 @@ import Filter from '@/components/Filter.vue';
         flex-direction: column;
     }
 
-    .column {
-        flex: 1;
+    .gallery {
+        column-count: 1;
+        column-gap: 1rem;
+    }
 
-        flex-direction: column;
+    @media screen and (min-width: 600px) {
+        .gallery {
+            column-count: 2;
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        .gallery {
+            column-count: 3;
+        }
+    }
+
+    .imageContainer {
+        margin-bottom: 1rem;
+        position: relative;
     }
 
     img {
+        display: block;
         width: 100%;
-        filter: grayscale(0);
         transition: filter .5s linear;
     }
 
-    img:hover {
-        filter: grayscale(80%) brightness(60%);
+    .imageContainer:hover {
         cursor: pointer;
     }
 
+    .imageContainer:hover img {
+        filter: brightness(50%);
+    }
+
+    .imageInfo {
+        position: absolute;
+        inset: 0 0 0 0;
+        display: grid;
+        place-items: center;
+
+        color: white;
+        font-size: 1.25rem;
+
+        opacity: 0;
+        transition: opacity .5s linear;
+    }
+
+    .imageInfo:hover {
+        opacity: 1;
+    }
     
 </style>
