@@ -1,5 +1,5 @@
 <script setup>
-  import Gallery from '../components/Gallery.vue'
+  import Gallery from '@/components/Gallery.vue'
 
   // here we will call the db for images
 
@@ -44,14 +44,14 @@
   .main-title::after {
     display: block;
 
-    content: '2025 - ©Vasja Škarabot';
+    content: 'Copyright © 2025 — Vasja Škarabot';
     font-size: clamp(.875rem, 1vw, 1rem);
     color: var(--color-text);
 
     font-weight: 100;
 
     background-color: #101f29;
-    mask: linear-gradient(to right, transparent, black, transparent);
+    border-radius: 2rem;
 
     text-align: center;
   }
@@ -59,7 +59,7 @@
   .grid {
     position: absolute;
     z-index: 10;
-    width: 100vw;
+    width: 100%;
     height: 70vh;
     mask: linear-gradient(black, transparent);
 
@@ -70,7 +70,7 @@
   }
 
   .grid div {
-    background-color: #101f29;
+    background-color: #6598ba;
   }
 
 </style>
