@@ -104,16 +104,10 @@
     margin-left: 1rem;
   }
 
-  .about::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: .5rem;
-    width: 2rem;
-    border: .25rem solid;
-    border-color: transparent transparent black transparent;
-    transform: translate(0, -100%);
+  .about p:not(.hello) {
+    font-size: .875rem; 
+    font-weight: 100; 
+    line-height: 1.25rem;
   }
 
   .hello {
