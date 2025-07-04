@@ -8,10 +8,23 @@
 <template>
   <main>
     <div class="background">
+
       <div class="grid">
         <div v-for="grid in Array.from({length:64},(_,k)=>k)"></div>
       </div>
+
+      <div class="about">
+        <p class="hello">Hello!</p>
+        <p>
+          Welcome to my wildlife project. 
+          Here I will share my photography journey starting from today 04/07/2025. 
+          I know the images won't look professional as I'm not willing to spend a bigger amount on money for a camera than a used Volkswagen Golf,
+          but I still think it's a fun hobby I was always willing to try.
+        </p>
+      </div>
+
       <h1 class="main-title">WildLife Photography</h1>
+
     </div>
     <Gallery />
   </main>
@@ -73,4 +86,48 @@
     background-color: #6598ba;
   }
 
+  .about {
+    position: absolute;
+    top: 1.85rem;
+    right: 1rem;
+    z-index: 10;
+
+    max-width: 600px;
+    color: var(--color-text);
+
+    padding: 1rem;
+
+    border-radius: 2rem 0 2rem 2rem;
+
+    background: radial-gradient(circle at 0 0, #101f29d0, black);
+
+    margin-left: 1rem;
+  }
+
+  .about::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: .5rem;
+    width: 2rem;
+    border: .25rem solid;
+    border-color: transparent transparent black transparent;
+    transform: translate(0, -100%);
+  }
+
+  .hello {
+    font-weight: 600;
+    color: white;
+  }
+
+  .hello::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: white;
+
+    mask: linear-gradient(to left, black, transparent);
+  }
 </style>
