@@ -1,23 +1,34 @@
 <script setup>
 import Filter from '@/components/Filter.vue';
+import { ref, computed } from 'vue';
+
+    const selectedFilter = ref(0);
 
     const url = '/src/assets/images/gallery/';
     const images = [
-        { name: 'Buck', url: 'buck.jpg' }, 
-        { name: 'Kingfisher', url: 'kingfi.jpg' }, 
-        { name: 'Lion', url: 'lion.jpg' }, 
-        { name: 'Fox', url: 'fox.jpg' }, 
-        { name: 'Hummingbird', url: 'hum.jpg' }, 
-        { name: 'Turtle', url: 'turtle.jpg' },
+        { name: 'Buck', url: 'buck.jpg', class: 2 }, 
+        { name: 'Kingfisher', url: 'kingfi.jpg', class: 1 }, 
+        { name: 'Lion', url: 'lion.jpg', class: 2 }, 
+        { name: 'Fox', url: 'fox.jpg', class: 2 }, 
+        { name: 'Hummingbird', url: 'hum.jpg', class: 1 }, 
+        { name: 'Turtle', url: 'turtle.jpg', class: 3 },
     ];
+
+    const filterChange = (index) => {
+        selectedFilter.value = index;
+    }
+
+    const filteredImages = computed(() => {
+        return images.filter(image => image.class === selectedFilter.value || selectedFilter.value === 0)
+    });
 
 </script>
 
 <template>
     <div class="container">
-        <Filter />
+        <Filter @animal-filter="filterChange" />
         <div class="gallery">
-            <div class="imageContainer" v-for="image in images">
+            <div class="imageContainer" v-for="image in filteredImages">
                 <img :src="url + image.url" :key="image">
                 <div class="imageInfo">
                     {{ image.name }}

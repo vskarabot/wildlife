@@ -1,10 +1,11 @@
 <script setup>
 import { ref } from 'vue';
-
     const selectedAnimalClass = ref(0);
+    const emit = defineEmits(['animal-filter']);
 
     const selectAnimalClass = (index) => {
         selectedAnimalClass.value = index;
+        emit('animal-filter', index);
     }
 </script>
 
@@ -14,6 +15,7 @@ import { ref } from 'vue';
             v-for="(animal, index) in ['All', 'Birds', 'Mammals', 'Reptiles']" 
             @click="selectAnimalClass(index)" 
             :class=" selectedAnimalClass === index ? 'selected' : null"
+            :key="index"
         >
             {{ animal }}
         </div>
